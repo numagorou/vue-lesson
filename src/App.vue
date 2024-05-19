@@ -36,6 +36,10 @@ console.log(instructor.email)
 console.log(instructor.age)
 console.log(info.value.student)
 console.log(instructor)
+const { sections } = {
+  sections: ref(10),
+  language: ref('Japanese')
+}
 </script>
 <template>
   <h1>Title:{{ title }}</h1>
@@ -46,4 +50,5 @@ console.log(instructor)
   <h2>Instructor age:{{ instructor.bio }}</h2>
   <h2>Instructor SNS Twitter:{{ instructor.sns.twitter }}</h2>
   <h2>Instructor email:{{ instructor.email }}</h2>
+  <h2>Course Info Sections:{{ sections }}</h2>
 </template>
