@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-const vueURL = ref('https://vuejs.org')
-const vueId = ref('vue-link')
+const count = ref(0)
 </script>
 <template>
-  <a v-bind:id="vueId" v-bind:href="vueURL">Vue.js</a>
+  <p>{{ count }}</p>
+  <input type="text" @keyup.space.delete="count++" />
 </template>
