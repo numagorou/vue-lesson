@@ -1,16 +1,15 @@
 <script setup>
-import { ref, watchEffect } from 'vue'
-const count = ref(0)
-watchEffect(() => {
-  console.log('watchEffect')
-  console.log(count.value)
-  setTimeout(() => {
-    console.log('after 1 second')
-  }, 1000)
-  count.value = 'hello'
-})
+import CountUp from '@/components/CountUp.vue'
+import BaseButton from '@/components/BaseButton.vue'
 </script>
 <template>
-  <p>{{ count }}</p>
-  <button @click="count++">+1</button>
+  <h1 class="red">App</h1>
+  <CountUp />
+  <BaseIcon />
+  <BaseButton id="base-button"/>
 </template>
+<style scoped>
+.red {
+  color: red;
+}
+</style>
