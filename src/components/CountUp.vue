@@ -1,11 +1,42 @@
 <script setup>
-import { ref } from 'vue'
-
+import {
+  ref,
+  onMounted,
+  onUnmounted,
+  onUpdated,
+  onBeforeMount,
+  onBeforeUnmount,
+  onBeforeUpdate,
+  nextTick
+} from 'vue'
 const count = ref(0)
+
+onMounted(() => {
+  console.log('onMounted')
+})
+onBeforeMount(() => {
+  console.log('onBeforeMount')
+})
+onUpdated(() => {
+  console.log('onUpdated')
+})
+onBeforeUpdate(() => {
+  console.log('onBeforeUpdate')
+})
+onUnmounted(() => {
+  console.log('onUnmounted')
+})
+onBeforeUnmount(() => {
+  console.log('onBeforeUnmount')
+})
+async function countUp() {
+  count.value++
+  await nextTick
+  console.log('nextTick')
+  debugger
+}
 </script>
 <template>
-  <h2 v-bind="$attrs">CountUp</h2>
-  <BaseIcon />
-  <p class="red">count: {{ count }}</p>
-  <button @click="count++">+1</button>
+  <p>count: {{ count }}</p>
+  <button @click="countUp">+1</button>
 </template>

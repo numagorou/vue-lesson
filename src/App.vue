@@ -1,15 +1,25 @@
 <script setup>
-import CountUp from '@/components/CountUp.vue'
-import BaseButton from '@/components/BaseButton.vue'
+import { defineAsyncComponent, ref, shallowRef } from 'vue'
+import CompA from '@/components/CompA.vue'
+// import CompB from '@/components/CompB.vue'
+import BaseLoader from '@/components/BaseLoader.vue'
+import ErrorMessage from '@/components/ErrorMessage.vue'
+const CompB = defineAsyncComponent({
+  loader: () => import('@/components/CompB.vue'),
+  loadingComponent: BaseLoader,
+  delay: 200,
+  errorComponent: ErrorMessage,
+  timeout: 2000
+})
+import CompC from '@/components/CompC.vue'
+
+const currentComp = shallowRef('CompA')
+const isShow = ref(false)
 </script>
 <template>
-  <h1 class="red">App</h1>
-  <CountUp />
-  <BaseIcon />
-  <BaseButton id="base-button"/>
+  <h1>Dynamic Components</h1>
+  <button @click="currentComp = CompA">A</button>
+  <button @click="currentComp = CompB">B</button>
+  <button @click="currentComp = CompC">C</button>
+  <component :is="currentComp" />
 </template>
-<style scoped>
-.red {
-  color: red;
-}
-</style>
