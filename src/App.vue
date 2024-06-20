@@ -1,37 +1,55 @@
 <script setup>
 import { ref } from 'vue'
 
-const isShow = ref(true)
+const fruits = ref(['Apple', 'Banana', 'Grape'])
+const newFruit = ref('')
 </script>
+
 <template>
   <h1>Animation</h1>
-  <div :class="{ 'opacity-80': isShow, 'opacity-20': !isShow, slide: !isShow }">Hello</div>
-  <p>isShow:{{ isShow }}</p>
-  <button @click="isShow = !isShow">show</button>
+  <input v-model="newFruit" type="text" />
+  <button @click="fruits.unshift(newFruit)">Add</button>
+  <TransitionGroup name="fade">
+    <div v-for="(fruit, index) in fruits" :key="fruit" @click="fruits.splice(index, 1)">
+      {{ fruit }}
+    </div>
+  </TransitionGroup>
 </template>
 <style scoped>
-div {
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-active {
   transition: opacity 1s;
 }
 
-.opacity-80 {
-  opacity: 0.8;
+.fade-enter-to {
+  opacity: 1;
 }
-.opacity-20 {
-  opacity: 0.2;
+
+.fade-move {
+  transition: transform 1s;
 }
-.slide {
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  transition: opacity 1s;
+  position: absolute;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active {
   animation: slide 1s;
 }
-@keyframes slide {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(100px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+
+.slide-leave-active {
+  animation: slide 1s reverse;
 }
 </style>
